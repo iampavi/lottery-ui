@@ -11,7 +11,6 @@ export default function QuickActions() {
   return (
     <div className="bg-white rounded-xl shadow-md p-6 md:p-8 slide-in">
       <div className="flex items-center gap-3 mb-6">
-        <span className="bg-kerala-green text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm md:text-base">7</span>
         <h2 className="text-xl md:text-2xl font-bold text-kerala-dark">QUICK ACTIONS</h2>
       </div>
 
