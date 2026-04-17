@@ -15,7 +15,7 @@ export default function ResultDisplay() {
         </div>
         <p className="text-lg md:text-xl font-semibold text-kerala-dark">Spinner Animation</p>
         <p className="text-xs md:text-sm text-gray-600 text-center">
-          Beautiful loading animation while processing results
+          Beautiful loading animation while processing resultsss
         </p>
       </div>
     </div>
