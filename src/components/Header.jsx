@@ -52,12 +52,6 @@ export default function Header() {
           </nav>
         )}
       </div>
-
-      {/* Subtitle */}
-      <div className="bg-kerala-dark/50 text-white text-center py-2 md:py-3">
-        <h2 className="text-xl md:text-3xl font-bold">KERALA LOTTERY RESULT PORTAL</h2>
-        <p className="text-xs md:text-sm opacity-90 mt-1">Modern UI/UX Design</p>
-      </div>
     </header>
   );
 }

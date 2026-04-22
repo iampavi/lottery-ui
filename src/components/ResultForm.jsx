@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
-import { CheckCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
+import axios from "axios";
 
 export default function ResultForm({ onCheckResult }) {
   const [ticketNumber, setTicketNumber] = useState('');
   const [lottery, setLottery] = useState('win-win');
   const [date, setDate] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (ticketNumber && lottery && date) {
-      onCheckResult(ticketNumber, lottery, date);
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/lottery/check`,
+        {
+          ticketNumber,
+          lottery,
+          date,
+        }
+      );
+
+      onCheckResult(res.data);
+    } catch (error) {
+      console.error(error);
+      alert("Server error");
     }
   };
-
   return (
     <div className="bg-white rounded-xl shadow-md p-6 md:p-8 slide-in">
       <div className="flex items-center gap-3 mb-6">
