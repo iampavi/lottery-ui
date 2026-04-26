@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-
+import authRoutes from "./routes/authRoutes.js";
 import lotteryRoutes from "./routes/lottery.js";
 import adminRoutes from "./routes/admin.js";
 
@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/lottery", lotteryRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/auth", authRoutes);
 
 
 app.get("/", (req, res) => {

@@ -6,28 +6,28 @@ export default function ResultForm({ onCheckResult }) {
   const [ticketNumber, setTicketNumber] = useState('');
   const [lottery, setLottery] = useState('win-win');
   const [date, setDate] = useState('');
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  try {
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/lottery/check`,
+      {
+        ticketNumber: ticketNumber.trim().toUpperCase(),
+        lottery,
+        date,
+      }
+    );
 
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/lottery/check`,
-        {
-          ticketNumber,
-          lottery,
-          date,
-        }
-      );
+    onCheckResult(res.data);
 
-      onCheckResult(res.data);
-    } catch (error) {
-      console.error(error);
-      alert("Server error");
-    }
-  };
+  } catch (err) {
+    console.error(err);
+  }
+};
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 md:p-8 slide-in">
+   <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
       <div className="flex items-center gap-3 mb-6">
         <h2 className="text-xl md:text-2xl font-bold text-kerala-dark">RESULT ENTRY UI</h2>
       </div>
@@ -42,7 +42,7 @@ export default function ResultForm({ onCheckResult }) {
             type="text"
             placeholder="e.g., WK 123456"
             value={ticketNumber}
-            onChange={(e) => setTicketNumber(e.target.value.toUpperCase())}
+            onChange={(e) =>setTicketNumber(e.target.value.replace(/\s/g, ""))}
             className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kerala-green focus:border-transparent"
           />
         </div>
@@ -76,11 +76,10 @@ export default function ResultForm({ onCheckResult }) {
 
         {/* Submit Button */}
         <button
-          type="submit"
-          className="w-full bg-kerala-green text-white py-3 md:py-4 rounded-lg font-bold text-base md:text-lg hover:bg-kerala-dark transition-colors"
-        >
-          Check Result
-        </button>
+  className="w-full bg-kerala-green text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition"
+>
+  Check Result
+</button>
 
         {/* Features List */}
         <div className="mt-6 pt-6 border-t border-gray-200 grid grid-cols-2 gap-3 md:gap-4">

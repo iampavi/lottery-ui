@@ -35,3 +35,21 @@ export const loginAdmin = async (req, res) => {
     res.status(401).json({ success: false, message: "Invalid credentials" });
   }
 };
+export const getAllResults = async (req, res) => {
+  const results = await Result.find().sort({ date: -1 });
+  res.json(results);
+};
+
+export const deleteResult = async (req, res) => {
+  await Result.findByIdAndDelete(req.params.id);
+  res.json({ message: "Deleted" });
+};
+
+export const updateResult = async (req, res) => {
+  const updated = await Result.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  res.json(updated);
+};
